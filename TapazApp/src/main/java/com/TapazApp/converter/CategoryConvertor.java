@@ -1,4 +1,4 @@
-package com.TapazApp.convertor;
+package com.TapazApp.converter;
 
 import com.TapazApp.dto.request.CreateCategoryRequestDto;
 import com.TapazApp.dto.response.AllCategoriesResponseDto;
