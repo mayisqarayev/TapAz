@@ -4,8 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.FieldDefaults;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
@@ -13,6 +15,7 @@ import java.time.LocalDate;
 @Entity
 @Data
 @Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ParameterEntity {
 
     @Id

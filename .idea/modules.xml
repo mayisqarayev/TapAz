@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TapazApp/TapazApp.iml" filepath="$PROJECT_DIR$/TapazApp/TapazApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/TapazApp.iml" filepath="$PROJECT_DIR$/.idea/TapazApp.iml" />
     </modules>
   </component>
 </project>
