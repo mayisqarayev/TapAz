@@ -28,7 +28,8 @@ public class CategoryService {
 
     public List<AllCategoriesResponseDto> getAllCategories()
     {
-        return categoryRepository.findAll().stream().map(categoryConvertor::toAllCategoriesResponseDtoFromEntity)
+        return categoryRepository.findAll().stream()
+                .map(categoryConvertor::toAllCategoriesResponseDtoFromEntity)
                 .toList();
     }
 

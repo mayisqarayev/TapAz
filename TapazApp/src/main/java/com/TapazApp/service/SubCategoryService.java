@@ -26,7 +26,8 @@ public class SubCategoryService {
 
     public List<AllSubCategoriesByCategoryId> getAllSubCategoriesByCategoryId(String categoryId)
     {
-        return categoryRepository.findAll().stream().filter(i -> i.getFkCategoryId() == categoryId)
+        return categoryRepository.findAll().stream()
+                .filter(i -> i.getFkCategoryId() == categoryId)
                 .map(subCategoryConverter::toAllSubCategoriesByCategoryIdFromEntity)
                 .toList();
     }

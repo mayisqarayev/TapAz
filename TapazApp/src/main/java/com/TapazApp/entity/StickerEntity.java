@@ -33,9 +33,8 @@ public class StickerEntity {
 
     String fkStickerTypeId;
     String fkAccountId;
-    String fkParameterId;
 
-    public StickerEntity(String id, String stickerName, String stickerPrice, Boolean isSelected, String stickerDescription, BigDecimal numberOfSticker, LocalDate deploymentDate, BigDecimal countOfView, Boolean stickerStatus, String fkStickerTypeId, String fkAccountId, String fkParameterId) {
+    public StickerEntity(String id, String stickerName, String stickerPrice, Boolean isSelected, String stickerDescription, BigDecimal numberOfSticker, LocalDate deploymentDate, BigDecimal countOfView, Boolean stickerStatus, String fkStickerTypeId, String fkAccountId) {
         this.id = id;
         this.stickerName = stickerName;
         this.stickerPrice = stickerPrice;
@@ -47,7 +46,6 @@ public class StickerEntity {
         this.stickerStatus = stickerStatus;
         this.fkStickerTypeId = fkStickerTypeId;
         this.fkAccountId = fkAccountId;
-        this.fkParameterId = fkParameterId;
     }
 
     public StickerEntity() {

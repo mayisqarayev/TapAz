@@ -37,7 +37,9 @@ public class ParameterEntity {
     String city;
     Boolean parameterStatus;
 
-    public ParameterEntity(Boolean parameterStatus, String id, String brandOfTransport, String colour, String engineOfTransport, String fuelTypeOfTransport, String acceleratingBoxTypeOfTransport, String bodyTypeOfTransport, LocalDate creationDate, String marchOfTransport, String typeOfBuilding, String areaOfBuilding, String numberOfRoom, String locationOfBuilding, Boolean isNew, String city) {
+    String fkStickerid;
+
+    public ParameterEntity(String id, String brandOfTransport, String colour, String engineOfTransport, String fuelTypeOfTransport, String acceleratingBoxTypeOfTransport, String bodyTypeOfTransport, LocalDate creationDate, String marchOfTransport, String typeOfBuilding, String areaOfBuilding, String numberOfRoom, String locationOfBuilding, Boolean isNew, String city, Boolean parameterStatus, String fkStickerid) {
         this.id = id;
         this.brandOfTransport = brandOfTransport;
         this.colour = colour;
@@ -53,7 +55,8 @@ public class ParameterEntity {
         this.locationOfBuilding = locationOfBuilding;
         this.isNew = isNew;
         this.city = city;
-        this.parameterStatus= parameterStatus;
+        this.parameterStatus = parameterStatus;
+        this.fkStickerid = fkStickerid;
     }
 
     public ParameterEntity() {
