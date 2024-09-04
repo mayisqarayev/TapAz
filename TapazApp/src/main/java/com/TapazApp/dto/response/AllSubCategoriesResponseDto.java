@@ -6,12 +6,12 @@ import lombok.experimental.FieldDefaults;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AllSubCategoriesByCategoryId {
+public class AllSubCategoriesResponseDto {
 
     String subCategoryName;
     CategoryDtoForSubCategoryResponseDto category;
 
-    public AllSubCategoriesByCategoryId(String subCategoryName, CategoryDtoForSubCategoryResponseDto category) {
+    public AllSubCategoriesResponseDto(String subCategoryName, CategoryDtoForSubCategoryResponseDto category) {
         this.subCategoryName = subCategoryName;
         this.category = category;
     }

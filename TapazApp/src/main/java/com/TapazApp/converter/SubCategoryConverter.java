@@ -1,7 +1,7 @@
 package com.TapazApp.converter;
 
 import com.TapazApp.dto.request.CreateSubCategoryRequestDto;
-import com.TapazApp.dto.response.AllSubCategoriesByCategoryId;
+import com.TapazApp.dto.response.AllSubCategoriesResponseDto;
 import com.TapazApp.entity.SubCategoryEntity;
 import com.TapazApp.service.CategoryService;
 import org.springframework.stereotype.Service;
@@ -24,9 +24,9 @@ public class SubCategoryConverter {
         return entity;
     }
 
-    public AllSubCategoriesByCategoryId toAllSubCategoriesByCategoryIdFromEntity(SubCategoryEntity entity)
+    public AllSubCategoriesResponseDto toAllSubCategoriesByCategoryIdFromEntity(SubCategoryEntity entity)
     {
-        return new AllSubCategoriesByCategoryId(
+        return new AllSubCategoriesResponseDto(
                 entity.getSubCategoryName(),
                 categoryService.getCategoryById(entity.getFkCategoryId())
         );
