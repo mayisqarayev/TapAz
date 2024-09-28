@@ -10,9 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,8 +42,14 @@ public class StickerService {
         Page<StickerEntity> stickerEntitiesPage = stickerRepository
                 .findAll(PageRequest.of(requestDto.getPageNumber(), requestDto.getPageSize()));
 
-        List<AllStickersResponseDto> collect = sortList(stickerEntitiesPage.getContent()).stream()
-                .filter(i -> i.getFkAccountId() == requestDto.getAccountId())
+        List<StickerEntity> content = stickerEntitiesPage.getContent();
+
+        content.sort((i, j) -> Integer.compare(
+                        Integer.parseInt(i.getStickerPrice()),
+                        Integer.parseInt(j.getStickerPrice()))
+        );
+
+        List<AllStickersResponseDto> collect = content.stream().filter(i -> i.getFkAccountId() == requestDto.getAccountId())
                 .map(stickerConverter::toAllStickersResponseDtoFromEntity)
                 .collect(Collectors.toList());
 
@@ -57,35 +61,51 @@ public class StickerService {
                 .build();
     }
 
-    public List<StickerEntity> sortList(List<StickerEntity> list)
+    public AllStickersPageResponseDto getAllStickersByAccountIdSortByDeploymentDate(AllStickersRequestDto requestDto)
     {
-        for (int i = 0; i < list.size(); i++) {
-            for(int j = i+1; j < list.size();j++)
-            {
-                if(Integer.parseInt(list.get(i).getStickerPrice()) > Integer.parseInt(list.get(j).getStickerPrice()))
-                {
-                    StickerEntity temp = list.get(i);
-                    list.set(i, list.get(j));
-                    list.set(j, temp);
-                }
-            }
-        }
+        Page<StickerEntity> stickerEntitiesPage = stickerRepository
+                .findAll(PageRequest.of(requestDto.getPageNumber(), requestDto.getPageSize()));
 
-        return list;
-    }
+        List<StickerEntity> content = stickerEntitiesPage.getContent();
 
-    public List<AllStickersResponseDto> getAllStickersByAccountIdSortByDeploymentDate(String accountId)
-    {
-        return stickerRepository.getAllStickersByAccountIdSortByDeploymentDate(accountId).stream()
+        content.sort(Comparator.comparing(StickerEntity::getDeploymentDate));
+
+        List<AllStickersResponseDto> collect = content.stream()
                 .map(stickerConverter::toAllStickersResponseDtoFromEntity)
                 .collect(Collectors.toList());
+
+        return AllStickersPageResponseDto.builder()
+                .totalElements(stickerEntitiesPage.getTotalElements())
+                .totalPages((long)stickerEntitiesPage.getTotalPages())
+                .isEmpty(stickerEntitiesPage.isEmpty())
+                .content(collect)
+                .build();
     }
 
-    public List<AllStickersResponseDto> getAllStickersByAccountIdSortByStickerPriceDesc(String accountId)
+    public AllStickersPageResponseDto getAllStickersByAccountIdSortByStickerPriceDesc(AllStickersRequestDto requestDto)
     {
-        return stickerRepository.findAllStickersByAccountIdSortByStickerPriceDesc(accountId).stream()
+        Page<StickerEntity> stickerEntitiesPage = stickerRepository
+                .findAll(PageRequest.of(requestDto.getPageNumber(), requestDto.getPageSize()));
+
+        List<StickerEntity> content = stickerEntitiesPage.getContent();
+
+        content.sort((i, j) -> Integer.compare(
+                Integer.parseInt(i.getStickerPrice()),
+                Integer.parseInt(i.getStickerPrice())
+        ));
+        Collections.reverse(content);
+
+        List<AllStickersResponseDto> collect = content.stream()
                 .map(stickerConverter::toAllStickersResponseDtoFromEntity)
                 .collect(Collectors.toList());
+
+        return AllStickersPageResponseDto.builder()
+                .totalElements(stickerEntitiesPage.getTotalElements())
+                .totalPages((long)stickerEntitiesPage.getTotalPages())
+                .isEmpty(stickerEntitiesPage.isEmpty())
+                .content(collect)
+                .build();
     }
+
 
 }
