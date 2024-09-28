@@ -18,7 +18,7 @@ public interface StickerRepository extends JpaRepository<StickerEntity, String> 
     List<StickerEntity> findAllStickersByAccountIdSortByStickerPrice(String accountId);
 
     @Query("select a from StickerEntity a where a.id = ?1 order by a.deploymentDate asc")
-    List<StickerEntity> getAllStickersByAccountIdSortByDeploymentDate(String accountId);
+    List<StickerEntity> findAllStickersByAccountIdSortByDeploymentDate(String accountId);
 
     @Query("select a from StickerEntity a where a.id = ?1 order by a.stickerPrice desc")
     List<StickerEntity> findAllStickersByAccountIdSortByStickerPriceDesc(String accountId);

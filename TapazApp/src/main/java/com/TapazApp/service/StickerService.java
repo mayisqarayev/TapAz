@@ -37,7 +37,7 @@ public class StickerService {
                 .collect(Collectors.toList());
     }
 
-    public AllStickersPageResponseDto getAllStickersByAccountIdSortByStickerPrice(AllStickersRequestDto requestDto)
+    public AllStickersPageResponseDto getAllStickersByAccountIdSortByStickerPricePg(AllStickersRequestDto requestDto)
     {
         Page<StickerEntity> stickerEntitiesPage = stickerRepository
                 .findAll(PageRequest.of(requestDto.getPageNumber(), requestDto.getPageSize()));
@@ -61,7 +61,14 @@ public class StickerService {
                 .build();
     }
 
-    public AllStickersPageResponseDto getAllStickersByAccountIdSortByDeploymentDate(AllStickersRequestDto requestDto)
+    public List<AllStickersResponseDto> getAllStickersByAccountIdSortByStickerPrice(String accountId)
+    {
+        return stickerRepository.findAllStickersByAccountIdSortByStickerPrice(accountId).stream()
+                .map(stickerConverter::toAllStickersResponseDtoFromEntity)
+                .collect(Collectors.toList());
+    }
+
+    public AllStickersPageResponseDto getAllStickersByAccountIdSortByDeploymentDatePg(AllStickersRequestDto requestDto)
     {
         Page<StickerEntity> stickerEntitiesPage = stickerRepository
                 .findAll(PageRequest.of(requestDto.getPageNumber(), requestDto.getPageSize()));
@@ -82,7 +89,14 @@ public class StickerService {
                 .build();
     }
 
-    public AllStickersPageResponseDto getAllStickersByAccountIdSortByStickerPriceDesc(AllStickersRequestDto requestDto)
+    public List<AllStickersResponseDto> getAllStickersByAccountIdSortByDeploymentDate(String accountId)
+    {
+        return stickerRepository.findAllStickersByAccountIdSortByDeploymentDate(accountId).stream()
+                .map(stickerConverter::toAllStickersResponseDtoFromEntity)
+                .collect(Collectors.toList());
+    }
+
+    public AllStickersPageResponseDto getAllStickersByAccountIdSortByStickerPriceDescPg(AllStickersRequestDto requestDto)
     {
         Page<StickerEntity> stickerEntitiesPage = stickerRepository
                 .findAll(PageRequest.of(requestDto.getPageNumber(), requestDto.getPageSize()));
@@ -105,6 +119,13 @@ public class StickerService {
                 .isEmpty(stickerEntitiesPage.isEmpty())
                 .content(collect)
                 .build();
+    }
+
+    public List<AllStickersResponseDto> getAllStickersByAccountIdSortByStickerPriceDesc(String accountId)
+    {
+        return stickerRepository.findAllStickersByAccountIdSortByStickerPriceDesc(accountId).stream()
+                .map(stickerConverter::toAllStickersResponseDtoFromEntity)
+                .collect(Collectors.toList());
     }
 
 
